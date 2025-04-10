@@ -1,11 +1,11 @@
 plugins {
     id("java")
-    id("xyz.jpenilla.run-paper") version "2.3.1"
     kotlin("jvm")
+    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "org.ttlzmc"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 repositories {
     maven {
@@ -17,7 +17,6 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks {

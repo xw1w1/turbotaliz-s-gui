@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Contract
 import java.util.*
 import java.util.stream.Collectors
 
-object StyleUtils {
+object ComponentFormatter {
     @Contract("_ -> new")
     fun single(vararg components: Component?): Component {
         return Component.join(JoinConfiguration.noSeparators(), components.asList())
@@ -24,7 +24,6 @@ object StyleUtils {
     fun component(`object`: Any): Component {
         return if (`object` is Component) `object` else Component.text(`object`.toString())
     }
-
 
     @Contract("_ -> new")
     fun components(vararg objects: Any): Array<Component> {

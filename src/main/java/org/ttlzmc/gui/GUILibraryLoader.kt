@@ -2,7 +2,7 @@ package org.ttlzmc.gui
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue
 import org.bukkit.plugin.java.JavaPlugin
-import org.ttlzmc.gui.lib.GuiManager
+import org.ttlzmc.gui.GuiEventHandler
 
 /**
  * Specify the main class that the library should refer to when the plugin is running.
@@ -17,7 +17,7 @@ object GUILibraryLoader {
         checkInit()
         this.instance = main
         this.instance!!.server.pluginManager.registerEvents(
-            GuiManager, this.instance!!
+            GuiEventHandler, this.instance!!
         )
     }
 
