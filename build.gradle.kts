@@ -1,11 +1,13 @@
 plugins {
     id("java")
     kotlin("jvm")
+    `maven-publish`
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "org.ttlzmc"
 version = "1.1-SNAPSHOT"
+val minecraftVersion = "1.21.4"
 
 repositories {
     maven {
@@ -16,12 +18,28 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:$minecraftVersion-R0.1-SNAPSHOT")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "org.ttlzmc.gui"
+            artifactId = "ttlzgui"
+            version = "1.1"
+
+            from(components["java"])
+        }
+    }
 }
 
 tasks {
     runServer {
-        minecraftVersion("1.21.4")
+        minecraftVersion(minecraftVersion)
+    }
+
+    jar {
+        archiveBaseName = "ttlzmc-gui-$version+paper-$minecraftVersion"
     }
 }
 
