@@ -35,7 +35,7 @@ class Gui(
         }
 
         tiles.values.forEach { tile ->
-            inventory.setItem(Tile.calculatePosition(tile), tile.itemStack())
+            inventory.setItem(tile.position, tile.itemStack())
         }
     }
 
@@ -58,7 +58,7 @@ class Gui(
             }
         }
 
-        this.tiles.values.forEach { tile -> newInventory.setItem(Tile.calculatePosition(tile), tile.itemStack())}
+        this.tiles.values.forEach { tile -> newInventory.setItem(tile.position, tile.itemStack())}
         this.inventory = newInventory
         this.open(player)
     }

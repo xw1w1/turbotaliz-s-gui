@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin
 object GUILibrary {
     private var instance: GuiManager? = null
 
-    fun init(main: JavaPlugin) {
+    fun newInstance(main: JavaPlugin) {
         checkInit()
         this.instance = GuiManager()
         main.server.pluginManager.registerEvents(this.instance!!.eventHandler, main)
@@ -25,7 +25,7 @@ object GUILibrary {
     @CanIgnoreReturnValue
     private fun checkInit(): Boolean {
         return (instance != null).also {
-            if (!it) throw RuntimeException("GUILibraryLoader cannot be initialized twice!")
+            if (!it) throw RuntimeException("GuiManager cannot be initialized twice!")
         }
     }
 }

@@ -42,14 +42,14 @@ class GuiBuilder(
     ) {
         val tile = Tile(row, column, material)
         block?.invoke(tile)
-        this.tiles.put(Tile.calculatePosition(tile), tile)
+        this.tiles.put(tile.position, tile)
     }
 
     /**
      * Attaches a new tile to this GUI.
      * @param tile tile
      */
-    fun tile(tile: Tile) = this.tiles.put(Tile.calculatePosition(tile), tile)
+    fun tile(tile: Tile) = this.tiles.put(tile.position, tile)
 
     fun build(): Gui = Gui(rows, title, backgroundFill, tiles)
 }

@@ -16,12 +16,12 @@ class GuiEventHandler(private val guiManager: GuiManager) : Listener {
 
     @EventHandler
     fun onQuit(event: PlayerQuitEvent) {
-        guiManager.findGui(event.player)?.close(event.player)
+        this.guiManager.findGui(event.player)?.close(event.player)
     }
 
     @EventHandler
     fun onClick(event: InventoryClickEvent) {
-        val gui = guiManager.findGui(event.whoClicked as Player)
+        val gui = this.guiManager.findGui(event.whoClicked as Player)
         event.isCancelled = true
 
         if (event.inventory != event.clickedInventory) return
@@ -31,7 +31,7 @@ class GuiEventHandler(private val guiManager: GuiManager) : Listener {
     @EventHandler
     fun onInventoryClose(event: InventoryCloseEvent) {
         val player = event.player as Player
-        val gui = guiManager.findGui(player)
+        val gui = this.guiManager.findGui(player)
         if (gui != null && gui.containsViewer(player) ) { gui.close(player) }
     }
 }

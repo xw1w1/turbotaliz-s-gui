@@ -1,7 +1,7 @@
 plugins {
-    id("java")
-    kotlin("jvm")
+    java
     `maven-publish`
+    kotlin("jvm") version "2.0.21"
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
@@ -35,6 +35,6 @@ tasks {
     }
 }
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+kotlin {
+    jvmToolchain(21)
 }
