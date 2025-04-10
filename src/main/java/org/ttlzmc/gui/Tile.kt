@@ -7,6 +7,11 @@ import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.ItemStack
 import org.jetbrains.annotations.Range
 
+/**
+ * A tile, one inventory slot. Can have a name, lore, and optionally an action when clicked.
+ * @since 1.1
+ * @author xw1w1
+ */
 @Suppress("MemberVisibilityCanBePrivate")
 open class Tile(
     var row: @Range(from = 0, to = 5) Int,

@@ -5,6 +5,11 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 
+/**
+ * Represents the action that should occur when tile is clicked. It can be anything, either one of the presets or a custom one
+ * @since 1.1
+ * @author xw1w1
+ */
 @FunctionalInterface
 fun interface TileClickAction {
 

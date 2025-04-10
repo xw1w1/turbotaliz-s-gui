@@ -10,13 +10,20 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 
+/**
+ * Built GUI class. Use [GuiManager] to build your own.
+ * @see GuiBuilder
+ * @see GuiManager
+ * @since 1.1
+ * @author xw1w1
+ */
 class Gui(
-    rows: Int,
-    name: Component,
-    backgroundMaterial: (() -> Material)?,
+    private val rows: Int,
+    private var name: Component,
+    private val backgroundMaterial: (() -> Material)?,
     private val tiles: Int2ObjectOpenHashMap<Tile>
 ) {
-    private val inventory: Inventory = Bukkit.createInventory(null, rows * 9, name)
+    private var inventory: Inventory = Bukkit.createInventory(null, rows * 9, name)
     private val viewers = mutableSetOf<Player>()
 
     init {
@@ -32,12 +39,37 @@ class Gui(
         }
     }
 
+    fun changeTitle(component: Component) {
+        this.name = component
+        this.update()
+    }
+
+    fun update() {
+        this.viewers.forEach(::update)
+    }
+
+    fun update(player: Player) {
+        val newInventory = Bukkit.createInventory(null, rows * 9, name)
+
+        this.backgroundMaterial?.let { bg ->
+            val bgItem = ItemStack(bg())
+            for (i in 0 until newInventory.size) {
+                newInventory.setItem(i, bgItem)
+            }
+        }
+
+        this.tiles.values.forEach { tile -> newInventory.setItem(Tile.calculatePosition(tile), tile.itemStack())}
+        this.inventory = newInventory
+        this.open(player)
+    }
+
     fun open(player: Player) {
         viewers.add(player)
         player.openInventory(inventory)
     }
 
     fun close(player: Player) {
+        viewers.remove(player)
         player.closeInventory(InventoryCloseEvent.Reason.PLUGIN)
     }
 
@@ -46,7 +78,6 @@ class Gui(
     }
 
     fun handleClick(slot: Int, player: Player, clickType: ClickType) {
-        val tile = this.tiles[slot]
-        tile?.clickAction?.onClick(player, tile, clickType)
+        this.tiles[slot]?.click(player, clickType)
     }
 }

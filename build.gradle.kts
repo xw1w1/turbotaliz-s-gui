@@ -39,7 +39,7 @@ tasks {
     }
 
     jar {
-        archiveBaseName = "ttlzmc-gui-$version+paper-$minecraftVersion"
+        archiveFileName = "ttlzmc-gui-$version+paper-$minecraftVersion.jar"
     }
 }
 

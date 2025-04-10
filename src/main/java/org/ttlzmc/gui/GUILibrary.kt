@@ -2,26 +2,25 @@ package org.ttlzmc.gui
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue
 import org.bukkit.plugin.java.JavaPlugin
-import org.ttlzmc.gui.GuiEventHandler
 
 /**
  * Specify the main class that the library should refer to when the plugin is running.
  *
- * Simply call [GUILibraryLoader.init] in the main class of your plugin, and proceed.
+ * Simply call [GUILibrary.init] in the main class of your plugin, and proceed.
  * @see GuiManager
+ * @since 1.0
+ * @author xw1w1
  */
-object GUILibraryLoader {
-    private var instance: JavaPlugin? = null
+object GUILibrary {
+    private var instance: GuiManager? = null
 
     fun init(main: JavaPlugin) {
         checkInit()
-        this.instance = main
-        this.instance!!.server.pluginManager.registerEvents(
-            GuiEventHandler, this.instance!!
-        )
+        this.instance = GuiManager()
+        main.server.pluginManager.registerEvents(this.instance!!.eventHandler, main)
     }
 
-    fun instance(): JavaPlugin {
+    fun getInstance(): GuiManager {
         return instance ?: throw RuntimeException("GUILibraryLoader is not initialized!")
     }
 

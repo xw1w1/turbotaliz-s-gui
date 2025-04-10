@@ -5,11 +5,23 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.event.player.PlayerQuitEvent
 
-object GuiEventHandler : Listener {
+/**
+ * Handles events for [GuiManager].
+ * @see 1.1
+ * @author xw1w1
+ */
+class GuiEventHandler(private val guiManager: GuiManager) : Listener {
+
+    @EventHandler
+    fun onQuit(event: PlayerQuitEvent) {
+        guiManager.findGui(event.player)?.close(event.player)
+    }
+
     @EventHandler
     fun onClick(event: InventoryClickEvent) {
-        val gui = GuiManager.findGui(event.whoClicked as Player)
+        val gui = guiManager.findGui(event.whoClicked as Player)
         event.isCancelled = true
 
         if (event.inventory != event.clickedInventory) return
@@ -19,7 +31,7 @@ object GuiEventHandler : Listener {
     @EventHandler
     fun onInventoryClose(event: InventoryCloseEvent) {
         val player = event.player as Player
-        val gui = GuiManager.findGui(player)
+        val gui = guiManager.findGui(player)
         if (gui != null && gui.containsViewer(player) ) { gui.close(player) }
     }
 }
