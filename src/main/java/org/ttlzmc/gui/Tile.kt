@@ -31,13 +31,9 @@ open class Tile(
         }
     }
 
-    open fun click(player: Player, type: ClickType) {
-        this.clickAction?.onClick(player, this, type)
-    }
+    open fun click(player: Player, type: ClickType) = this.clickAction?.onClick(player, this, type)
 
     companion object {
-        fun calculatePosition(tile: Tile): Int {
-            return tile.row * 9 + tile.column
-        }
+        fun calculatePosition(tile: Tile): Int = tile.row * 9 + tile.column
     }
 }

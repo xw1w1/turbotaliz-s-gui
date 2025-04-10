@@ -9,14 +9,6 @@ group = "org.ttlzmc"
 version = "1.1-SNAPSHOT"
 val minecraftVersion = "1.21.4"
 
-repositories {
-    maven {
-        name = "papermc"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
-    mavenCentral()
-}
-
 dependencies {
     compileOnly("io.papermc.paper:paper-api:$minecraftVersion-R0.1-SNAPSHOT")
 }
@@ -26,7 +18,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "org.ttlzmc.gui"
             artifactId = "ttlzgui"
-            version = "1.1"
+            version = "testing-1.1"
 
             from(components["java"])
         }

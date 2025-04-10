@@ -73,11 +73,7 @@ class Gui(
         player.closeInventory(InventoryCloseEvent.Reason.PLUGIN)
     }
 
-    fun containsViewer(player: Player): Boolean {
-        return this.viewers.contains(player)
-    }
+    fun containsViewer(player: Player): Boolean = this.viewers.contains(player)
 
-    fun handleClick(slot: Int, player: Player, clickType: ClickType) {
-        this.tiles[slot]?.click(player, clickType)
-    }
+    fun handleClick(slot: Int, player: Player, clickType: ClickType) = this.tiles[slot]?.click(player, clickType)
 }

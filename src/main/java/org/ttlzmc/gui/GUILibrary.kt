@@ -20,9 +20,7 @@ object GUILibrary {
         main.server.pluginManager.registerEvents(this.instance!!.eventHandler, main)
     }
 
-    fun getInstance(): GuiManager {
-        return instance ?: throw RuntimeException("GUILibraryLoader is not initialized!")
-    }
+    fun getInstance(): GuiManager = instance ?: throw RuntimeException("GUILibraryLoader is not initialized!")
 
     @CanIgnoreReturnValue
     private fun checkInit(): Boolean {
