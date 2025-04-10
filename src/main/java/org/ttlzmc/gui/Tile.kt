@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Range
  * @since 1.1
  * @author xw1w1
  */
-@Suppress("MemberVisibilityCanBePrivate")
 open class Tile(
     row: @Range(from = 0, to = 5) Int,
     column: @Range(from = 0, to = 8) Int,
